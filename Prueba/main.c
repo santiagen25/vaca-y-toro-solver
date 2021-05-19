@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+//para compiliar y crear un ejecutable en ubuntu, gcc -o main main.c
+
+int err(int type);
+
 int main(int argc, char *argv[])
 {
 	//generamos la base de datos como array
@@ -34,11 +38,26 @@ int main(int argc, char *argv[])
 			value_n /= 10;
 		}
 
+		printf("Di el numero: %d\n", numero);
+		bool numeroDeVoT = false, sumaDeVyT = false;
+		do{
+			printf("\nCuantas VACAS hay?\n");
+			scanf("%d", &vacas);
+			numeroDeVoT = vacas > 4 || vacas < 0;
+			if (numeroDeVoT) err(1);
+		} while (numeroDeVoT);
+		
+		do{
+			printf("Cuantos TOROS hay?\n");
+			scanf("%d", &toros);
+			numeroDeVoT = toros > 4 || toros < 0;
+			sumaDeVyT = (vacas + toros) > 4;
+			if (numeroDeVoT) err(2);
+			else if (sumaDeVyT) err(3);
+		} while (numeroDeVoT || sumaDeVyT);
+		
 
-		printf("Di el numero: %d\nCuantas VACAS hay?\n", numero);
-		scanf("%d", &vacas);
-		printf("Cuantos TOROS hay?\n");
-		scanf("%d", &toros);
+
 		for(int n = 0; n < 3024; n++){
 			if(bd[n] != 0){
 
@@ -64,9 +83,9 @@ int main(int argc, char *argv[])
 				}
 
 				if(numeros_disponibles <= 1){
-					if(bd[n] == 0) printf("La información recibida de vacas y toros no es correcta, no hay ningún numero con esas especificaciones.");
+					if(bd[n] == 0) printf("La informaciï¿½n recibida de vacas y toros no es correcta, no hay ningï¿½n numero con esas especificaciones.");
 					else printf("El numero que queda es el: %d\nNumero de intentos realizados: %d\n", bd[n], intentos);
-					bool a;
+					int a;
 					scanf("%d", &a);
 					return 0;
 				}
@@ -91,3 +110,15 @@ int main(int argc, char *argv[])
 	}
 }
 
+int err (int type) {
+	printf("\nERROR: ");
+	if(type == 1) printf("Las VACAS han de ser de 0 a 5");
+	else if(type == 2) printf("Los TOROS han de ser de 0 a 5");
+	else if(type == 3) printf("La suma de TOROS y VACAS no puede ser mayor de 4");
+	else if(type == 4) printf("n/a");
+	else if(type == 5) printf("n/a");
+	else printf("Not defined");
+	printf("\n");
+
+	return 0;
+}
