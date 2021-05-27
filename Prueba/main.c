@@ -101,6 +101,8 @@ int main(int argc, char *argv[])
 				if(bd[n] != 0) printf("%d\n",bd[n]);
 			}
 		}
+		if (numeros_disponibles == 1) printf("El numero que pensabas es el %d", numeros_disponibles);
+		else if(numeros_disponibles =< 0) err(4);
 
 		printf("Numeros disponibles: %d\tPorcentaje de numeros que quedan: %.2f\tNumero de intentos %d\n", numeros_disponibles, ((float)numeros_disponibles*100/3024), intentos);
 		intentos++;
@@ -115,7 +117,7 @@ int err (int type) {
 	if(type == 1) printf("Las VACAS han de ser de 0 a 5");
 	else if(type == 2) printf("Los TOROS han de ser de 0 a 5");
 	else if(type == 3) printf("La suma de TOROS y VACAS no puede ser mayor de 4");
-	else if(type == 4) printf("n/a");
+	else if(type == 4) printf("Algo ha ido mal, ningún número encaja con tus directrices");
 	else if(type == 5) printf("n/a");
 	else printf("Not defined");
 	printf("\n");
